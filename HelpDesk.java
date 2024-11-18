@@ -12,7 +12,7 @@ public class HelpDesk {
         return instance;
     }
 
-    public synchronized void displaycurrentQueueNumber() {
+    public synchronized void displayCurrentQueueNumber() {
         System.out.println("\nCurrent Queue Number: " + queueNumber);
     }
 
