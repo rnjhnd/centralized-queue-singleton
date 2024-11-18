@@ -11,7 +11,7 @@ public class CentralSystem {
         helpDesk.serveNextCustomer("Help Desk #2");
         helpDesk.serveNextCustomer("Help Desk #3");
 
-        helpDesk.displaycurrentQueueNumber();
+        helpDesk.displayCurrentQueueNumber();
 
         helpDesk.resetQueueNumber(1);
 
