@@ -1,50 +1,99 @@
-## Centralized Queuing System (Pag-IBIG Office)
+# Centralized Queue Manager
 
-A simple Java console application that demonstrates a centralized queuing system for three help desk stations using the Singleton pattern. All desks share the same queue counter, ensuring customers are served in a single, global order. The app also allows resetting the queue number when needed (e.g., reorganization, recovery from issues).
+A Java implementation of the **Singleton Design Pattern** for a centralized, shared queue across multiple help desk stations. This project shows how a single, globally accessible manager can coordinate queue numbers consistently and safely.
 
-### Features
-- **Single global queue**: One counter shared across all help desks.
-- **Singleton `HelpDesk`**: Ensures only one instance manages the queue.
-- **Thread-safe operations**: Synchronized access to the queue counter.
-- **Reset capability**: Set the queue number to a specific value when required.
-- **Console demo**: Provides a straightforward example flow and output.
+## 📋 Overview
 
-### Design Overview
-- **Pattern**: `HelpDesk` implements the Singleton pattern via a private constructor and a synchronized `getInstance()` method.
-- **Thread-safety**: `displayCurrentQueueNumber`, `serveNextCustomer`, and `resetQueueNumber` are synchronized to prevent race conditions if invoked from multiple threads.
-- **Flow**: `CentralSystem` drives a simple scenario serving customers at three desks, displays the current number, then demonstrates a reset.
+The Centralized Queue Manager provides one queue number shared by three help desks. Each desk requests the next number from the same `HelpDesk` instance. The system supports displaying the current number and resetting the counter when necessary (e.g., reorganization or recovery from issues).
 
-### Project Structure
-- `src/CentralSystem.java`: Entry point with a basic usage demo.
-- `src/HelpDesk.java`: Singleton queue manager.
-- `src/UML Class Diagram.png`: High-level class diagram of the design.
+## 🏗️ Architecture
+
+This project implements the **Singleton Pattern** with the following components:
+
+- **`HelpDesk` (Singleton Manager)**: The single source of truth for the queue number
+- **`CentralSystem` (Main Application)**: Demonstrates serving customers from three desks and the reset flow
+- **UML Diagram**: High-level view of the classes and their relationships
+
+### Design Pattern Benefits
+
+- **Single source of truth**: Guarantees one authoritative queue manager
+- **Controlled access**: Centralizes queue operations via a single instance
+- **Lazy initialization**: Instance is created only when first requested
+- **Thread-safety**: Synchronized methods prevent race conditions in concurrent scenarios
+
+## 📊 UML Class Diagram
+
+![UML Class Diagram](src/UML%20Class%20Diagram.png)
+
+The following UML class diagram illustrates:
+- The `HelpDesk` singleton and its synchronized operations
+- The `CentralSystem` entry point using the singleton instance
+- How the Singleton design pattern is applied in this project
+
+## 🚀 Features
+
+- **Single Global Queue**: One counter shared across all desks
+- **Singleton Manager**: `HelpDesk` ensures only one instance exists
+- **Thread-Safe Operations**: Synchronized access to the counter
+- **Queue Reset**: Set the queue number to a specific value
+- **Console Demonstration**: Clear example flow and output
+
+## 📁 Project Structure
+
+```
+centralized-queue-singleton/
+├── README.md
+└── src/
+    ├── CentralSystem.java          # Main application demo
+    ├── HelpDesk.java               # Singleton queue manager
+    └── UML Class Diagram.png       # UML diagram
+```
+
+## 🛠️ Installation & Setup
 
 ### Prerequisites
-- Java JDK 8 or newer
-- Windows PowerShell, Command Prompt, or any terminal
 
-### Build and Run (Windows PowerShell)
-From the project root:
+- Java Development Kit (JDK) 8 or higher
+- Any Java IDE (IntelliJ IDEA, Eclipse, VS Code) or a terminal
 
-```powershell
-cd "C:\Users\Ellaine Dale\Downloads\centralized-queue-singleton"
+### Getting Started
 
-# Compile to an output directory
-javac -d out src\*.java
+1. **Clone or download** the project files
+2. **Navigate** to the project directory
+3. **Compile** the Java files:
+   ```bash
+   javac -d out src/*.java
+   ```
+4. **Run** the application:
+   ```bash
+   java -cp out CentralSystem
+   ```
 
-# Run the program
-java -cp out CentralSystem
+## 📖 Usage
+
+### Basic Usage
+
+The main application (`CentralSystem.java`) demonstrates how the singleton queue manager is used:
+
+```java
+HelpDesk helpDesk = HelpDesk.getInstance();
+
+helpDesk.serveNextCustomer("Help Desk #1");
+helpDesk.serveNextCustomer("Help Desk #2");
+helpDesk.serveNextCustomer("Help Desk #3");
+
+helpDesk.displayCurrentQueueNumber();
+
+helpDesk.resetQueueNumber(1);
+
+helpDesk.serveNextCustomer("Help Desk #1");
+helpDesk.serveNextCustomer("Help Desk #2");
+helpDesk.serveNextCustomer("Help Desk #3");
 ```
 
-If you prefer compiling directly in-place without `out/`:
+### Expected Output
 
-```powershell
-javac src\*.java
-java -cp src CentralSystem
 ```
-
-### Example Output
-```text
 Pag-Ibig Queueing System
 
 Currently serving Customer #1 at Help Desk #1
@@ -63,11 +112,29 @@ Currently serving Customer #2 at Help Desk #2
 Currently serving Customer #3 at Help Desk #3
 ```
 
-### Extending This Example
-- **Concurrency**: Create multiple threads that call `serveNextCustomer` on the same `HelpDesk` instance to simulate real concurrent desks. The synchronized methods will preserve correctness.
-- **UI/Monitoring**: Replace console prints with a GUI or web API for real-time monitoring. The queue manager can remain the single source of truth.
-- **Persistence**: Store the current queue number to disk or a database to survive restarts.
+## 🔧 Extending the Project
 
-### Notes
-- The included UML diagram is located at `src/UML Class Diagram.png`.
-- This repository is a minimal demonstration and intentionally omits persistence and user interfaces beyond console output.
+### Adding New Capabilities
+
+- **Concurrency Simulation**: Create multiple threads that call `serveNextCustomer` on the same `HelpDesk` instance to simulate real desks
+- **UI/Monitoring**: Replace console prints with a GUI or web dashboard for real-time visibility
+- **Persistence**: Save and restore the queue number across restarts (file or database)
+
+## 🎯 Design Patterns Used
+
+### Singleton Pattern
+- **Purpose**: Provide a single, globally accessible instance managing the queue
+- **Benefits**: Ensures consistency, centralizes logic, and simplifies coordination
+- **Implementation**: Private constructor, synchronized `getInstance()`, and synchronized queue operations
+
+## 🤝 Contributing
+
+Contributions are welcome:
+- Add monitoring/UI layers
+- Improve concurrency simulations and benchmarks
+- Enhance documentation and examples
+- Add tests
+
+## 📄 License
+
+This project is open source and available under the MIT License. Consider adding a `LICENSE` file to formalize this.
