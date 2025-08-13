@@ -137,4 +137,9 @@ Contributions are welcome:
 
 ## 📄 License
 
-This project is open source and available under the MIT License. Consider adding a `LICENSE` file to formalize this.
+This project is open source and available under the [MIT License](LICENSE).
+
+
+---
+
+**Note**: This implementation demonstrates clean code principles and design patterns best practices. The Singleton pattern is particularly useful when you must ensure exactly one instance of a component across the application, coordinate access to shared state/resources, or centralize configuration and control behind a globally accessible façade.
