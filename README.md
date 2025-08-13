@@ -42,11 +42,10 @@ The following UML class diagram illustrates:
 
 ```
 centralized-queue-singleton/
-├── README.md
-└── src/
-    ├── CentralSystem.java          # Main application demo
-    ├── HelpDesk.java               # Singleton queue manager
-    └── UML Class Diagram.png       # UML diagram
+├── src/
+│   ├── CentralSystem.java           # Main application demo
+│   └──  HelpDesk.java               # Singleton queue manager
+└── README.md                        # Project documentation
 ```
 
 ## 🛠️ Installation & Setup
@@ -138,7 +137,6 @@ Contributions are welcome:
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
-
 
 ---
 
